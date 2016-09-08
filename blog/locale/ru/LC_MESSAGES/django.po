@@ -1,0 +1,164 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-09-08 09:59+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#: blog/admin.py:17
+msgid "Important_dates"
+msgstr "Важные даты"
+
+#: blog/models.py:14
+msgid "Post"
+msgstr "Запись"
+
+#: blog/models.py:15
+msgid "Posts"
+msgstr "Записи"
+
+#: blog/models.py:18
+msgid "Entry title"
+msgstr "Заголовок записи"
+
+#: blog/models.py:21
+msgid "Entry text"
+msgstr "Текст записи"
+
+#: blog/models.py:23
+msgid "Creation time"
+msgstr "Время создания"
+
+#: blog/models.py:27
+msgid "Last edit"
+msgstr "Время изменения"
+
+#: blog/models.py:31
+msgid "Publish?"
+msgstr "Опубликовать?"
+
+#: blog/models.py:34
+msgid "Entry author"
+msgstr "Автор записи"
+
+#: blog/templates/blog/all_users.html:4 templates/base.html:29
+msgid "All users"
+msgstr "Все пользователи"
+
+#: blog/templates/blog/all_users.html:11
+msgid "View all posts"
+msgstr "Посмотреть все записи"
+
+#: blog/templates/blog/create_post.html:4
+msgid "Create new post"
+msgstr "Создать новую запись"
+
+#: blog/templates/blog/create_post.html:32
+msgid "Send"
+msgstr "Отправить"
+
+#: blog/templates/blog/edit_post.html:4
+msgid "Editing post"
+msgstr "Изменить запись"
+
+#: blog/templates/blog/edit_post.html:32 blog/templates/blog/full_post.html:24
+#: blog/templates/blog/posts_list.html:30
+msgid "Edit"
+msgstr "Изменить"
+
+#: blog/templates/blog/full_post.html:10
+msgid "Back to user records"
+msgstr "Вернуться к записям пользователя"
+
+#: blog/templates/blog/full_post.html:13
+#: blog/templates/blog/posts_list.html:14
+msgid "Not published"
+msgstr "Не опубликовано"
+
+#: blog/templates/blog/full_post.html:15
+#: blog/templates/blog/posts_list.html:16
+msgid "Creation time:"
+msgstr "Время создания:"
+
+#: blog/templates/blog/full_post.html:20
+#: blog/templates/blog/posts_list.html:25
+msgid "Updated time:"
+msgstr "Время изменения:"
+
+#: blog/templates/blog/login.html:4
+msgid "Login page"
+msgstr "Страница авторизации"
+
+#: blog/templates/blog/login.html:32
+msgid "Login"
+msgstr "Войти"
+
+#: blog/templates/blog/login.html:37
+msgid "Sorry, but you are already logged in"
+msgstr "Извините, но вы уже авторизованы"
+
+#: blog/templates/blog/login.html:38
+msgid "Main"
+msgstr "Главная"
+
+#: blog/templates/blog/posts_list.html:4
+msgid "Published posts by"
+msgstr "Запись пользователя"
+
+#: blog/templates/blog/posts_list.html:28
+msgid "Read full version"
+msgstr "Читать полностью"
+
+#: blog/templates/blog/posts_list.html:35
+msgid "This user has not posted anything"
+msgstr "Этот пользователь еще ничего не писал"
+
+#: blog/views.py:57
+#, python-format
+msgid "Post <%(title)s> successfully added!"
+msgstr "Запись <%(title)s> добавлена успешно!"
+
+#: blog/views.py:71
+#, python-format
+msgid "Post <%(title)s> successfully updated!"
+msgstr "Запись <%(title)s> изменена успешно!"
+
+#: templates/base.html:26
+msgid "Welcome, "
+msgstr "Добро пожаловать, "
+
+#: templates/base.html:32
+msgid "Create post"
+msgstr "Добавить запись"
+
+#: templates/base.html:37
+msgid "Exit"
+msgstr "Выход"
+
+#: templates/errors/404.html:4
+#, fuzzy
+#| msgid "Error 404"
+msgid "Error404"
+msgstr "Ошибка 404"
+
+#: templates/errors/404.html:11
+msgid "Error 404"
+msgstr "Ошибка 404"
+
+#: templates/errors/404.html:12
+msgid "Page not found"
+msgstr "Страница не найдена"

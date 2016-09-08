@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load staticfiles i18n %}
+
+{% block title %}{% trans "Error404" %}{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-8 col-sm-offset-2">
+      <div class="alert alert-danger"> 
+        <h1>{% trans "Error 404" %}!</h1>
+        <h3>{% trans "Page not found" %} :(</h3>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

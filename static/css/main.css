@@ -1,0 +1,46 @@
+body {
+    padding-bottom: 20px;
+}
+
+.total-center {
+    width: 100%;
+    height: 110px;
+    text-align: center;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto 0;
+}
+
+.error-form {
+    color: red;
+}
+
+.container-header {
+    height: 50px;
+    padding-top: 15px;
+    margin-bottom: 30px;
+}
+
+.wmd-panel {
+    margin-left: 0;
+    margin-right: 0;
+    width: inherit;
+}
+
+.dt-edit,
+.dt-create {
+    color: grey;
+}
+
+.bot-br {
+    margin-bottom: 50px;
+}
+
+.list-users {
+    padding: 20px 0;
+}
+
+.badge {
+    background-color:#f7c75d;
+}
