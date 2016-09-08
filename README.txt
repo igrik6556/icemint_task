@@ -29,7 +29,7 @@
 
 login = admin
 pass  = 123
-
+Пользователь:
 login = user1
 pass  = 123
 
@@ -64,6 +64,6 @@ There is created superuser:
 
 login = admin
 pass  = 123
-
+User:
 login = user1
 pass  = 123
