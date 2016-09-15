@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load staticfiles i18n markdown_deux_tags %}
 
-{% block title %}{% trans "Editing post" %}{% endblock title %}
+{% block title %}{{ title }}{% endblock title %}
 {% block extends_styles %} {{ form.media }} {% endblock extends_styles %}
 
 {% block content %}
@@ -29,7 +29,7 @@
             {{ field }}
         </div>
     {% endfor %}
-    <input class="btn btn-primary" type="submit" value={% trans "Edit" %} name="edit_post" >
+    <input class="btn btn-primary" type="submit" value={% trans "Send" %} name="create_post" >
     </form>
     </div>
   </div>

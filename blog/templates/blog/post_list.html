@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load staticfiles i18n markdown_deux_tags %}
 
-{% block title %}{% trans "Published posts by" %} {{ auth }}{% endblock title %}
+{% block title %}{% trans "Published posts by" %} {{ author.username }}{% endblock title %}
 
 {% block content %}
 <div class="container">
@@ -9,7 +9,7 @@
     <div class="col-sm-offset-3 col-sm-6">
 {% if posts|length > 0 %}
 {% for post in posts %}
-    <h2><a href="{% url "blog:full_post" post.pk %}">{{ post.title }}</a></h2>
+    <h2><a href="{% url "blog:post_detail" post.pk %}">{{ post.title }}</a></h2>
     {% if not post.is_publish %}
         <span class="badge">{% trans "Not published" %}</span>
     {% endif %}
@@ -25,8 +25,8 @@
         <h6 class="dt-edit">{% trans "Updated time:" %} {{ post.dt_edit }}</h6>
     {% endif %}
         <div class="bot-br">
-            <a href="{% url "blog:full_post" post.pk %}">{% trans "Read full version" %} &raquo;</a>
-            {% if user == auth %}
+            <a href="{% url "blog:post_detail" post.pk %}">{% trans "Read full version" %} &raquo;</a>
+            {% if user == post.author.username %}
             <a style="float:right" href="{% url "blog:edit_post" post.pk %}">{% trans "Edit" %}</a>
             {% endif %}
         </div>

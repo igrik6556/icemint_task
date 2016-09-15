@@ -35,7 +35,7 @@
 {% else %}
 <div class="total-center">
 <h1>{% trans "Sorry, but you are already logged in" %}</h1>
-<h3><a href="{% url "blog:users" %}">&raquo; {% trans "Main" %} &laquo;</a></h3>
+<h3><a href="{% url "blog:users_list" %}">&raquo; {% trans "Main" %} &laquo;</a></h3>
 </div>
 {% endif %}
 {% endblock content %}

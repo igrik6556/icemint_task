@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from blog.models import Post
 from blog.forms import PostForm
 from django.shortcuts import render
-from django.http import HttpResponseForbidden
+from django.http import Http404
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView
 from django.contrib.messages.views import SuccessMessageMixin
@@ -15,7 +15,7 @@ class UsersList(ListView):
     """
     Display list of all users from database.
     """
-    template_name = "blog/all_users.html"
+    template_name = "blog/users_list.html"
     context_object_name = "users"
     model = User
 
@@ -24,17 +24,20 @@ class UserPosts(ListView):
     """
     Display all records that the user has left.
     """
-    template_name = "blog/posts_list.html"
+    template_name = "blog/post_list.html"
+    context_object_name = "posts"
     model = Post
-    page_kwarg = "usr_pk"
+
+    def get_queryset(self, **kwargs):
+        qs = super(UserPosts, self).get_queryset(**kwargs)
+        if self.request.user.id == int(self.kwargs["pk"]):
+            return qs.filter(author=self.kwargs["pk"])
+        else:
+            return qs.filter(author=self.kwargs["pk"]).filter(is_publish=True)
 
     def get_context_data(self, **kwargs):
         context = super(UserPosts, self).get_context_data(**kwargs)
-        if int(self.request.user.id) == int(self.kwargs["usr_pk"]):
-            context["posts"] = Post.get_my_post(self.request.user.id)
-        else:
-            context["posts"] = Post.get_user_post(self.kwargs["usr_pk"])
-        context["auth"] = User.objects.get(pk=self.kwargs["usr_pk"])
+        context["author"] = User.objects.get(pk=self.kwargs["pk"])
         return context
 
 
@@ -42,10 +45,9 @@ class DetailUserPost(DetailView):
     """
     Show full post.
     """
-    template_name = "blog/full_post.html"
+    template_name = "blog/post_detail.html"
     context_object_name = "post"
     model = Post
-    pk_url_kwarg = "post_pk"
 
 
 class CreatePost(SuccessMessageMixin, CreateView):
@@ -53,12 +55,17 @@ class CreatePost(SuccessMessageMixin, CreateView):
     Create new post.
     """
     form_class = PostForm
-    template_name = "blog/create_post.html"
+    template_name = "blog/post_form.html"
     success_message = _("Post <%(title)s> successfully added!")
 
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super(CreatePost, self).form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super(CreatePost, self).get_context_data(**kwargs)
+        context["title"] = _("Create new post")
+        return context
 
 
 class EditPost(SuccessMessageMixin, UpdateView):
@@ -67,14 +74,19 @@ class EditPost(SuccessMessageMixin, UpdateView):
     """
     model = Post
     form_class = PostForm
-    template_name = "blog/edit_post.html"
+    template_name = "blog/post_form.html"
     success_message = _("Post <%(title)s> successfully updated!")
-    pk_url_kwarg = "post_pk"
 
-    def form_valid(self, form):
-        if form.instance.author != self.request.user:
-            return HttpResponseForbidden()
-        return super(EditPost, self).form_valid(form)
+    def dispatch(self, request, *args, **kwargs):
+        post = Post.objects.get(pk=kwargs["pk"])
+        if post.author != self.request.user:
+            raise Http404
+        return super(EditPost, self).dispatch(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super(EditPost, self).get_context_data(**kwargs)
+        context["title"] = _("Editing post")
+        return context
 
 
 def custom_404(request):

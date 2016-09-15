@@ -22,17 +22,17 @@
     {% block header %}
     <div class="container container-header">
       <div class="row">
-            <div class="col-sm-8">
+            <div class="col-sm-2">
+                <strong><a href="{% url "blog:users_list" %}">{% trans "All users" %}</a></strong>
+            </div>
+            <div class="col-sm-2">
+                <strong><a href="{% url "blog:post_create" %}">{% trans "Create post" %}</a></strong>
+            </div>
+            <div class="col-sm-offset-4 col-sm-3">
                 {% trans "Welcome, " %} <strong>{{ user.username }}</strong>
             </div>
-            <div class="col-sm-2">
-                <strong><a href="{% url "blog:users" %}">{% trans "All users" %}</a></strong>
-            </div>
-            <div class="col-sm-2">
-                <strong><a href="{% url "blog:create_post" %}">{% trans "Create post" %}</a></strong>
-            </div>
-      </div>
-      <div class="row">
+
+
             <div class="col-sm-1">
                 <strong><a href="{% url "logout" %}">{% trans "Exit" %}</a></strong>
             </div>

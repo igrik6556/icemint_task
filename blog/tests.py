@@ -16,29 +16,29 @@ class Test(TestCase):
         User.objects.create_user(username='Ihor', password='123')
         c.login(username="Ihor", password='123')
 
-        response = c.get(reverse('blog:users'))
+        response = c.get(reverse('blog:users_list'))
         self.assertEqual(response.status_code, 200)
 
-        response = c.get(reverse('blog:posts', kwargs={'usr_pk': 1}))
+        response = c.get(reverse('blog:post_list', kwargs={'pk': 1}))
         self.assertEqual(response.status_code, 200)
 
-        response = c.get(reverse('blog:create_post'))
+        response = c.get(reverse('blog:post_create'))
         self.assertEqual(response.status_code, 200)
 
-        response = c.post(reverse('blog:create_post'), data={
+        response = c.post(reverse('blog:post_create'), data={
             'title': 'Test post',
             'text': 'Some text',
         })
         self.assertEqual(response.status_code, 302)
         self.assertTrue(Post.objects.filter(title='Test post').exists())
 
-        response = c.get(reverse('blog:full_post', kwargs={'post_pk': 1}))
+        response = c.get(reverse('blog:post_detail', kwargs={'pk': 1}))
         self.assertEqual(response.status_code, 200)
 
-        response = c.get(reverse('blog:edit_post', kwargs={'post_pk': 1}))
+        response = c.get(reverse('blog:post_edit', kwargs={'pk': 1}))
         self.assertEqual(response.status_code, 200)
 
-        response = c.post(reverse('blog:edit_post', kwargs={'post_pk': 1}), data={
+        response = c.post(reverse('blog:post_edit', kwargs={'pk': 1}), data={
             'title': 'Test post',
             'text': 'Some edited text',
         })

@@ -1,13 +1,13 @@
 {% extends "base.html" %}
 {% load staticfiles i18n markdown_deux_tags %}
 
-{% block title %}{{ post.title }}. Author: {{ user.username }}{% endblock title %}
+{% block title %}{{ post.title }}. {% trans "Author" %}: {{ user.username }}{% endblock title %}
 
 {% block content %}
 <div class="container">
   <div class="row">
     <div class="col-sm-offset-3 col-sm-6">
-        <a href="{% url "blog:posts" post.author.pk %}">{% trans "Back to user records" %}</a>
+        <a href="{% url "blog:post_list" post.author.pk %}">{% trans "Back to user records" %}</a>
         <h2>{{ post.title }}</h2>
     {% if not post.is_publish %}
         <span class="badge">{% trans "Not published" %}</span>
@@ -21,7 +21,7 @@
     {% endif %}
         {% if user.pk == post.author.pk %}
         <div class="bot-br">
-            <a style="float:right" href="{% url "blog:edit_post" post.pk %}">{% trans "Edit" %}</a>
+            <a style="float:right" href="{% url "blog:post_edit" post.pk %}">{% trans "Edit" %}</a>
         </div>
         {% endif %}
       </div>

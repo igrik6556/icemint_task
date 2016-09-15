@@ -20,7 +20,7 @@ class Post(models.Model):
     text = models.TextField(_("Entry text"))
     dt_create = models.DateTimeField(
         _("Creation time"),
-        default=timezone.now
+        auto_now_add=True
     )
     dt_edit = models.DateTimeField(
         _("Last edit"),
@@ -30,23 +30,18 @@ class Post(models.Model):
     is_publish = models.BooleanField(_("Publish?"))
     author = models.ForeignKey(
         User,
-        verbose_name=_("Entry author")
+        verbose_name=_("Entry author"),
+        related_name="posts"
     )
 
     def __str__(self):
         return self.title
 
     def save(self, *args, **kwargs):
-        if Post.objects.filter(id=self.id).exists():
+        if self.pk:
             self.dt_edit = timezone.now()
         super(Post, self).save(*args, **kwargs)
 
-    def get_user_post(self):
-        return Post.objects.filter(author=self).filter(is_publish=True)
-
-    def get_my_post(self):
-        return Post.objects.filter(author=self)
-
     @models.permalink
     def get_absolute_url(self):
-        return "blog:full_post", [self.pk]
+        return "blog:post_detail", [self.pk]

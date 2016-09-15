@@ -103,7 +103,7 @@ STATICFILES_DIRS = (
 )
 
 LOGIN_URL = 'login'
-LOGIN_REDIRECT_URL = 'blog:users'
+LOGIN_REDIRECT_URL = 'blog:users_list'
 
 try:
     from local_settings import *
