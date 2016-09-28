@@ -20,25 +20,13 @@ class UsersList(ListView):
     model = User
 
 
-class UserPosts(ListView):
+class UserPosts(DetailView):
     """
     Display all records that the user has left.
     """
     template_name = "blog/post_list.html"
-    context_object_name = "posts"
-    model = Post
-
-    def get_queryset(self, **kwargs):
-        qs = super(UserPosts, self).get_queryset(**kwargs)
-        if self.request.user.id == int(self.kwargs["pk"]):
-            return qs.filter(author=self.kwargs["pk"])
-        else:
-            return qs.filter(author=self.kwargs["pk"]).filter(is_publish=True)
-
-    def get_context_data(self, **kwargs):
-        context = super(UserPosts, self).get_context_data(**kwargs)
-        context["author"] = User.objects.get(pk=self.kwargs["pk"])
-        return context
+    context_object_name = "author"
+    model = User
 
 
 class DetailUserPost(DetailView):
