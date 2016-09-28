@@ -6,6 +6,11 @@ from django.contrib.auth.models import User
 from django.utils.translation import ugettext as _
 
 
+class PostManager(models.Manager):
+    def published(self):
+        return super().get_queryset().filter(is_publish=True)
+
+
 class Post(models.Model):
     class Meta:
         db_table = "Post"
@@ -33,6 +38,8 @@ class Post(models.Model):
         verbose_name=_("Entry author"),
         related_name="posts"
     )
+
+    objects = PostManager()
 
     def __str__(self):
         return self.title

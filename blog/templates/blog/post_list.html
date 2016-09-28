@@ -1,38 +1,19 @@
 {% extends "base.html" %}
 {% load staticfiles i18n markdown_deux_tags %}
 
-{% block title %}{% trans "Published posts by" %} {{ author.username }}{% endblock title %}
+{% block title %}{% trans "Published posts by" %}{{ author }}{% endblock title %}
 
 {% block content %}
 <div class="container">
   <div class="row">
-    <div class="col-sm-offset-3 col-sm-6">
-{% if posts|length > 0 %}
-{% for post in posts %}
-    <h2><a href="{% url "blog:post_detail" post.pk %}">{{ post.title }}</a></h2>
-    {% if not post.is_publish %}
-        <span class="badge">{% trans "Not published" %}</span>
-    {% endif %}
-        <h6 class="dt-create">{% trans "Creation time:" %} {{ post.dt_create }}</h6>
-        <div class="post-text">
-    {% if post.text|length > 100 %}
-        {{ post.text|truncatewords_html:10|markdown }}
-    {% else %}
-        {{ post.text|markdown }}
-    {% endif %}
-        </div>
-    {% if post.dt_edit %}
-        <h6 class="dt-edit">{% trans "Updated time:" %} {{ post.dt_edit }}</h6>
-    {% endif %}
-        <div class="bot-br">
-            <a href="{% url "blog:post_detail" post.pk %}">{% trans "Read full version" %} &raquo;</a>
-            {% if user == post.author.username %}
-            <a style="float:right" href="{% url "blog:edit_post" post.pk %}">{% trans "Edit" %}</a>
-            {% endif %}
-        </div>
-{% endfor %}
+    <div class="col-sm-offset-3 col-sm-6">login: <strong>{{user}}</strong>, auth: <strong>{{author}}</strong><br>
+        {% for post in request.user.posts.published %}
+            {{post}}
+        {% endfor %}
+{% if user == author %}
+    {% include "blog/posts.html" with posts=author.posts.all %}
 {% else %}
-    <h2>{% trans "This user has not posted anything" %}</h2>
+    {% include "blog/posts.html" with posts=author.posts.all %}
 {% endif %}
     </div>
   </div>
